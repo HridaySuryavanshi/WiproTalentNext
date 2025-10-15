@@ -1,0 +1,81 @@
+/* Page background color */
+body {
+    background-color: purple;
+    font-family: sans-serif;
+    color: white;
+}
+
+/* Form background color and styling */
+form {
+    background-color: gray;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+}
+
+/* General styles for input fields */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Important for padding and width */
+    background-color: #f0f0f0;
+    color: black;
+}
+
+/* Style for input fields when the cursor is inside them (focus) */
+input[type="text"]:focus,
+input[type="password"]:focus {
+    background-color: #555; /* Darker background on focus */
+    color: white; /* Text becomes white when typing */
+    box-shadow: 0 0 8px rgba(81, 203, 238, 1);
+    outline: none; /* Removes the default browser outline */
+}
+
+/* Styling for the submit button */
+input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Style for submit button on hover */
+input[type="submit"]:hover {
+    background-color: #45a049; /* Darker green */
+    color: white; /* Text color remains white on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Styling for gender radio buttons */
+.radio-group {
+    margin-bottom: 15px;
+}
+
+.radio-group label {
+    margin-right: 15px;
+}
+
+/* Date and time display in the top-right corner */
+#datetime-container {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 14px;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 5px 10px;
+    border-radius: 5px;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f4; }
+        .container { width: 400px; margin: 50px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        input { width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box; }
+        #errorMsg { text-align:center; font-weight: bold; color: red; height: 1em; margin-bottom: 15px; }
+        input[type="submit"] { background-color: #28a745; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Library Login</h2>
+    <div id="errorMsg"></div>
+    <form id="loginForm" onsubmit="return handleLogin()">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        
+        <input type="submit" value="Login">
+    </form>
+     <p>Don't have an account? <a href="register.html">Register here</a>.</p>
+</div>
+
+<script>
+    function handleLogin() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const errorDiv = document.getElementById('errorMsg');
+
+        // Get the list of users from localStorage
+        const users = JSON.parse(localStorage.getItem('libraryUsers')) || [];
+        
+        // Find a user with matching email and password
+        const validUser = users.find(user => user.email === email && user.password === password);
+
+        if (validUser) {
+            // Successful login: go to the home page
+            window.location.href = "home.html";
+        } else {
+            // On error, display "Invalid Credentials"
+            errorDiv.textContent = "Invalid Credentials";
+        }
+
+        return false; // Prevents the form from actually submitting
+    }
+</script>
+
+</body>
+</html>

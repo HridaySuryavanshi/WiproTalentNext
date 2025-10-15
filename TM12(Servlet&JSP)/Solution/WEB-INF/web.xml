@@ -1,0 +1,11 @@
+<web-app>
+    <servlet>
+        <servlet-name>BidServlet</servlet-name>
+        <servlet-class>com.auction.servlet.BidServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>BidServlet</servlet-name>
+        <url-pattern>/BidServlet</url-pattern>
+    </servlet-mapping>
+</web-app>

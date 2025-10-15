@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f4; }
+        .container { width: 400px; margin: 50px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        input { width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box; }
+        #emailStatus { font-size: 0.9em; font-weight: bold; color: red; display: block; height: 1em; } /* Reserve space */
+        input[type="submit"] { background-color: #007bff; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Register for XYZ Library</h2>
+    <form id="registrationForm" onsubmit="return handleRegistration()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" onblur="checkEmail()" required>
+        <span id="emailStatus"></span>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <input type="submit" value="Register">
+    </form>
+    <p>Already registered? <a href="login.html">Login here</a>.</p>
+</div>
+
+<script>
+    // Faking an AJAX call by checking localStorage
+    function checkEmail() {
+        const email = document.getElementById('email').value;
+        const statusSpan = document.getElementById('emailStatus');
+
+        // Regex for valid email pattern
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // b) Check for a valid email pattern first
+        if (!emailPattern.test(email)) {
+            statusSpan.textContent = "Invalid email-id";
+            return;
+        }
+
+        // --- Simulate checking a database ---
+        // Get existing users from localStorage, or create an empty array if none exist
+        const users = JSON.parse(localStorage.getItem('libraryUsers')) || [];
+
+        // a) Check if the email already exists
+        const userExists = users.some(user => user.email === email);
+        
+        if (userExists) {
+            statusSpan.textContent = "Email already exists";
+        } else {
+            statusSpan.textContent = ""; // Clear message if valid and available
+        }
+    }
+
+    function handleRegistration() {
+        // Run the check again on submit to be sure
+        checkEmail();
+        const statusSpan = document.getElementById('emailStatus');
+        if (statusSpan.textContent !== "") {
+            alert("Please fix the errors before submitting.");
+            return false; // Prevents the form from submitting
+        }
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        // Get existing users and add the new one
+        const users = JSON.parse(localStorage.getItem('libraryUsers')) || [];
+        users.push({ name, email, password });
+        
+        // Save the updated user list back to localStorage
+        localStorage.setItem('libraryUsers', JSON.stringify(users));
+        
+        alert("Registration successful!");
+        
+        // c) On successful registration, take the user to the 'Login' page.
+        window.location.href = "login.html";
+
+        return false; // Prevents the form from submitting in the traditional way
+    }
+</script>
+
+</body>
+</html>
